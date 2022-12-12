@@ -1,0 +1,52 @@
+.login-container {
+  background-color: rgba(248, 248, 246, 0.998);
+  margin: auto;
+  border-radius: 4px;
+  padding: 50px;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+}
+h1 {
+  text-align: center;
+  padding-top: 15px;
+  font-family: "Times New Roman", Times, serif;
+}
+.text-form {
+  text-align: center;
+  font-size: 19px;
+  font-family: "Times New Roman", Times, serif;
+}
+form {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: space-around;
+  flex-direction: row;
+  font-family: "Times New Roman", Times, serif;
+}
+form label {
+  display: flex;
+  margin-top: 24px;
+  font-size: 18px;
+}
+form input {
+  width: 220spx;
+  padding: 9px;
+  margin: 4px;
+  border: 1px solid gray;
+  border-radius: 6px;
+  outline: none;
+}
+button[type="submit"] {
+  width: 250px;
+  height: 50px;
+  background-color: rgb(24, 24, 70);
+  color: white;
+  padding: 4px;
+  margin-top: 15px;
+  border: none;
+  font-size: 15px;
+}
