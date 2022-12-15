@@ -7,6 +7,6 @@ import SignUp from "./siginUp";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <LogIn />
+    <SignUp />
   </React.StrictMode>
 );
