@@ -1,94 +1,94 @@
 import "./signUp.css";
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyD9TwYOlGC-i61SDmRdYMTnBlhQkGWKt84",
-  authDomain: "currencyproject-2f7ff.firebaseapp.com",
-  databaseURL: "https://currencyproject-2f7ff-default-rtdb.firebaseio.com",
-  projectId: "currencyproject-2f7ff",
-  storageBucket: "currencyproject-2f7ff.appspot.com",
-  messagingSenderId: "627025741672",
-  appId: "1:627025741672:web:a7f06c8725e1a66f4d78dd",
-  measurementId: "G-R46CJPS3MZ",
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-import { getDatabase, ref, set } from "firebase/database";
-
-const db = getDatabase();
-var FName;
-var LName;
-var Email;
-var Password;
-var signUp;
-
-function addingData(): void {
-  FName = document.getElementById("FName") as HTMLInputElement;
-  LName = document.getElementById("LName") as HTMLInputElement;
-  Email = document.getElementById("Email") as HTMLInputElement;
-  Password = document.getElementById("Password") as HTMLInputElement;
-  set(ref(db, "user" + FName.value), {
-    user_FName: FName ? FName.value : "",
-    user_lName: LName ? LName.value : "",
-    user_Email: Email ? Email.value : "",
-    user_Password: Password ? Password.value : "",
-  })
-    .then(() => {
-      alert("done");
-    })
-    .catch((error) => {
-      alert("error");
-    });
-  signUp = document.getElementById("signUp") as HTMLInputElement;
-  signUp.addEventListener("click", addingData);
-}
+import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { signUp, db } from "./firebase";
+import { ref, set } from "firebase/database";
+import { Navigate } from "react-router-dom";
+import CurrencyPage from "./currencyPage";
 
 function SignUp() {
+  const [fName, setFName] = useState("");
+  const [lName, setLName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  function handelSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    console.log(e.target);
+
+    signUp(email, password)
+      .then((credintialsUser) => {
+        console.log("credintialsUser", credintialsUser);
+        storedUserInfo(credintialsUser.user.uid, { fName, lName });
+
+        // <Navigate to="/currencyPage" />;
+      })
+      .catch(() => {});
+
+    function storedUserInfo(
+      userId: string,
+      data: { fName: string; lName: string }
+    ) {
+      const query = ref(db, "user" + "/" + userId);
+      set(query, data);
+    }
+  }
   return (
-    <form>
-      <div className="signup-container">
-        <h1>Sign Up</h1>
-        <p className="text-form">
-          Please fill in this form to create an account.
-        </p>
+    <>
+      <Link to="/">
+        <h3>Go Home</h3>
+      </Link>
+      <form onSubmit={handelSubmit}>
+        <div className="signup-container">
+          <h1>Sign Up</h1>
+          <p className="text-form">
+            Please fill in this form to create an account.
+          </p>
 
-        <label htmlFor="fName">First Name </label>
-        <input type="text" name="FName" id="FName" placeholder=""></input>
+          <label htmlFor="fName">First Name </label>
+          <input
+            type="text"
+            name="FName"
+            placeholder=""
+            value={fName}
+            onChange={(e) => setFName(e.target.value)}
+          ></input>
 
-        <label htmlFor="lName">Last Name </label>
-        <input type="text" name="LName" id="LName" placeholder=""></input>
-        <label htmlFor="email">Email </label>
-        <input type="text" name="Email" id="Email" placeholder=""></input>
+          <label htmlFor="lName">Last Name </label>
+          <input
+            type="text"
+            name="LName"
+            placeholder=""
+            value={lName}
+            onChange={(e) => setLName(e.target.value)}
+          ></input>
+          <label htmlFor="email">Email </label>
+          <input
+            type="text"
+            name="Email"
+            placeholder=""
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          ></input>
 
-        <label htmlFor="password">password </label>
-        <input
-          type="password"
-          name="Password"
-          id="Password"
-          placeholder=""
-        ></input>
+          <label htmlFor="password">password </label>
+          <input
+            type="password"
+            name="Password"
+            placeholder=""
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          ></input>
 
-        <button type="submit" name="signUp" id="signUp" onClick={heba}>
-          Sign Up
-        </button>
-        <p>
-          already have an account <a href="#">login</a>
-        </p>
-      </div>
-    </form>
+          <button type="submit" name="signUp" id="signUp">
+            Sign Up
+          </button>
+          <p>
+            already have an account <a href="#">login</a>
+          </p>
+        </div>
+      </form>
+    </>
   );
-}
-function heba() {
-  console.log("duha  ", document.getElementById("FName"));
-  addingData();
 }
 
 export default SignUp;

@@ -4,9 +4,10 @@ import App from "./App";
 import "./index.css";
 import LogIn from "./logIn";
 import SignUp from "./siginUp";
+import { BrowserRouter } from "react-router-dom";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <SignUp />
+    <App />
   </React.StrictMode>
 );
