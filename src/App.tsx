@@ -10,8 +10,12 @@ import SignUp from "./siginUp";
 import LogIn from "./logIn";
 import ProtectedRoutes from "./protectedRoutes";
 import CurrencyPage from "./currencyPage";
+import { store } from "./store";
 
 function App() {
+  const token = store.getState().token;
+  const isLogedIn = token !== "";
+
   return (
     <>
       <h1 className="home">Home</h1>
@@ -24,12 +28,15 @@ function App() {
 
         <Routes>
           <Route path="/signup" element={<SignUp />} />
-
           <Route path="/login" element={<LogIn />} />
-
-          <Route element={<ProtectedRoutes />}>
-            <Route path="/currenctPage" element={<CurrencyPage />} />
-          </Route>
+          <Route
+            path="/currenctPage"
+            element={
+              <ProtectedRoutes>
+                <CurrencyPage />
+              </ProtectedRoutes>
+            }
+          />
         </Routes>
       </BrowserRouter>
     </>

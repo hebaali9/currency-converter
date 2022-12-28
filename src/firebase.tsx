@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getDatabase, ref, set } from "firebase/database";
+import { getDatabase } from "firebase/database";
 import {
   getAuth,
   signInWithEmailAndPassword,
@@ -7,14 +7,14 @@ import {
 } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyD9TwYOlGC-i61SDmRdYMTnBlhQkGWKt84",
-  authDomain: "currencyproject-2f7ff.firebaseapp.com",
-  databaseURL: "https://currencyproject-2f7ff-default-rtdb.firebaseio.com/",
-  projectId: "currencyproject-2f7ff",
-  storageBucket: "currencyproject-2f7ff.appspot.com",
-  messagingSenderId: "627025741672",
-  appId: "1:627025741672:web:a7f06c8725e1a66f4d78dd",
-  measurementId: "G-R46CJPS3MZ",
+  apiKey: import.meta.env.VITE_API_KEY,
+  authDomain: import.meta.env.VITE_AUTH_DOMIN,
+  databaseURL: import.meta.env.VITE_DATABASE_URL,
+  projectId: import.meta.env.VITE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_MESSAGINGSENDER_ID,
+  appId: import.meta.env.VITE_API_ID,
+  measurementId: import.meta.env.VITE_MEASUREMENT_ID,
 };
 
 export const app = initializeApp(firebaseConfig);
@@ -28,13 +28,4 @@ export const signIn = (email: string, password: string) => {
 
 export const signUp = (email: string, password: string) => {
   return createUserWithEmailAndPassword(auth, email, password);
-};
-
-const dbData = {
-  users: {
-    id: {
-      firstName: "",
-      lastName: "",
-    },
-  },
 };

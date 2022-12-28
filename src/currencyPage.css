@@ -1,0 +1,21 @@
+.currenyPage {
+  display: flex;
+  justify-content: center;
+  color: white;
+  flex-direction: row;
+}
+
+input {
+  width: 12rem;
+  height: 2rem;
+}
+
+select {
+  width: 2rem;
+  height: 2.4rem;
+}
+h2 {
+  display: flex;
+  margin-top: auto;
+  padding: 6px;
+}

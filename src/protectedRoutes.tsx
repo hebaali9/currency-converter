@@ -1,13 +1,11 @@
 import { Navigate, Outlet } from "react-router-dom";
+import { store } from "./store";
 
-const useAuth = () => {
-  const user = { loggedIn: false };
-  return user && user.loggedIn;
-};
-function ProtectedRoutes() {
-  const isAth = useAuth();
+function ProtectedRoutes({ children }: { children: JSX.Element }) {
+  const token = store.getState().token;
+  const isLogedIn = token;
 
-  return isAth ? <Outlet /> : <Navigate to="/" />;
+  return isLogedIn ? children : <Navigate to="/login" />;
 }
 
 export default ProtectedRoutes;
