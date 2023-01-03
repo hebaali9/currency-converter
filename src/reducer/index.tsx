@@ -7,7 +7,7 @@ type ActionType =
 
 export function reducer(state = { token: "" }, action: ActionType) {
   switch (action.type) {
-    case "UPDATE_THE_TOKEN":
+    case "UPDATE_TOKEN":
       return {
         ...state,
         token: action.payload,

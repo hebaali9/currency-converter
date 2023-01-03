@@ -1,9 +1,12 @@
-import { Navigate, Outlet } from "react-router-dom";
-import { store } from "./store";
+import { Navigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function ProtectedRoutes({ children }: { children: JSX.Element }) {
-  const token = store.getState().token;
-  const isLogedIn = token;
+  type RootState = {
+    token: string;
+  };
+  const token = useSelector((state: RootState) => state.token);
+  const isLogedIn = !!token;
 
   return isLogedIn ? children : <Navigate to="/login" />;
 }
