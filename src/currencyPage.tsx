@@ -3,15 +3,10 @@ import "./currencyPage.css";
 import { Currency, mockCurrencyAPI, Rates } from "./api/mockCurrencyAPI";
 
 function CurrencyPage() {
-  //to put the currencies inside option
   const [currencies, setCurrencies] = useState<Partial<Rates>>({});
-  //for the from select to save the value the user select
   const [fromCurrency, setFromCurrency] = useState<Currency>("USD");
-  //for the To select to save the value the user select
   const [toCurreny, setToCurreny] = useState<Currency>("EUR");
-  //for the from input to save the value the user entered
   const [fromAmount, setFromAmount] = useState(0);
-  //for the To input to save the value the user entered
   const [toAmount, setToAmount] = useState(0);
 
   useEffect(() => {
@@ -28,11 +23,6 @@ function CurrencyPage() {
     );
   }
 
-  function handelAmountChange() {
-    // setToAmount(
-    //   (fromAmount * dolar / Object.values(data)[fromCurrency]
-    // )
-  }
   return (
     <>
       <br></br>
