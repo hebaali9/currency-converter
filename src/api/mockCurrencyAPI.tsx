@@ -41,5 +41,5 @@ export async function mockCurrencyAPI() {
 export type Currency = keyof typeof data;
 
 export type Rates = {
-  [x in Currency]: number;
+  [key in Currency]: number;
 };
