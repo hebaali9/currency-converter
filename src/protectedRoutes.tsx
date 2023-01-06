@@ -3,10 +3,9 @@ import { useSelector } from "react-redux";
 
 function ProtectedRoutes({ children }: { children: JSX.Element }) {
   type RootState = {
-    token: string;
+    loggedIn: Boolean;
   };
-  const token = useSelector((state: RootState) => state.token);
-  const isLogedIn = !!token;
+  const isLogedIn = useSelector((state: RootState) => state.loggedIn);
 
   return isLogedIn ? children : <Navigate to="/login" />;
 }

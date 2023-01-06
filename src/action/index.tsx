@@ -1,7 +1,7 @@
-function UPDATE_TOKEN_ACTION(token: string) {
+function SET_LOGGED_IN(loggedIn: Boolean) {
   return {
-    type: "UPDATE_TOKEN",
-    payload: token,
+    type: "SET_ISLOGGED_IN",
+    payload: loggedIn,
   };
 }
-export default UPDATE_TOKEN_ACTION;
+export default SET_LOGGED_IN;

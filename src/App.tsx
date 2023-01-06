@@ -10,15 +10,8 @@ import SignUp from "./siginUp";
 import LogIn from "./logIn";
 import ProtectedRoutes from "./protectedRoutes";
 import CurrencyPage from "./currencyPage";
-import { useSelector } from "react-redux";
-import { store } from "./store";
-type RootState = {
-  token: string;
-};
 
 function App() {
-  const token = useSelector((state: RootState) => state.token);
-
   return (
     <>
       <h1 className="home">Home page</h1>
@@ -31,15 +24,15 @@ function App() {
           <li>logIn</li>
         </Link>
         <br />
-        <Link to="/currenctPage">
-          <li>CurrencyPage</li>
+        <Link to="/currency-converter">
+          <li>Currency Converter</li>
         </Link>
 
         <Routes>
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<LogIn />} />
           <Route
-            path="/currenctPage"
+            path="/currency-converter"
             element={
               <ProtectedRoutes>
                 <CurrencyPage />

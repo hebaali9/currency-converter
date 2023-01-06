@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import { signUp, db } from "./firebase";
 import { ref, set } from "firebase/database";
-import UPDATE_TOKEN_ACTION from "./action";
+import SET_LOGGED_IN from "./action";
 import { useNavigate } from "react-router-dom";
 import { store } from "./store";
 
@@ -19,13 +19,10 @@ function SignUp() {
 
     signUp(email, password)
       .then((userCredintials) => {
-        //console.log(userCredintials.user.email); i kept them for a reason
         storeUserInfo(userCredintials.user.uid, { fName, lName });
-        //setToken(userCredintials.user.accessToken); i kept them for a reason
 
-        // @ts-ignore
-        store.dispatch(UPDATE_TOKEN_ACTION(userCredintials.user.accessToken));
-        navigate("/currenctPage");
+        store.dispatch(SET_LOGGED_IN(true));
+        navigate("/currency-converter");
       })
       .catch(() => {});
 

@@ -34,14 +34,9 @@ function CurrencyPage() {
           type="number"
           value={fromAmount.toString()}
           onChange={handleChange}
-          //onChange={(e) => setFromAmount(Number(e.target.value))}
         ></Input>
 
-        <Select
-          value={fromCurrency}
-          // @ts-ignore
-          onChange={(e) => setFromCurrency(e.target.value as Currency)}
-        >
+        <Select value={fromCurrency} onChange={(e) => setFromCurrency(e)}>
           {Object.keys(currencies).map((currency) => (
             <Select.Option key={currency} value={currency}>
               {currency}
@@ -61,8 +56,7 @@ function CurrencyPage() {
         <Select
           className="antd-select "
           value={toCurreny}
-          // @ts-ignore
-          onChange={(e) => setToCurreny(e.target.value as Currency)}
+          onChange={(e) => setToCurreny(e)}
         >
           {Object.keys(currencies).map((currency) => (
             <Select.Option key={currency} value={currency}>
