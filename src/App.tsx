@@ -14,7 +14,7 @@ import CurrencyPage from "./currencyPage";
 function App() {
   return (
     <>
-      <h1 className="home">Home page</h1>
+      <h1 className="text-center sm:text-left text-blue-600">Home page</h1>
       <BrowserRouter>
         <Link to="/signup">
           <li>signup</li>
