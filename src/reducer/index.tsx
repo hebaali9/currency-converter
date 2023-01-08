@@ -5,12 +5,12 @@ type ActionType =
     }
   | any;
 
-export function reducer(state = { token: "" }, action: ActionType) {
+export function reducer(state = { loggedIn: false }, action: ActionType) {
   switch (action.type) {
-    case "UPDATE_THE_TOKEN":
+    case "SET_ISLOGGED_IN":
       return {
         ...state,
-        token: action.payload,
+        loggedIn: action.payload,
       };
     default:
       return state;

@@ -1,28 +1,71 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "./currencyPage.css";
+import { Currency, mockCurrencyAPI, Rates } from "./api/mockCurrencyAPI";
+import { Input, Select } from "antd";
 
-const Base_URL =
-  "https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/eur/jpy.json";
 function CurrencyPage() {
+  const [currencies, setCurrencies] = useState<Partial<Rates>>({});
+  const [fromCurrency, setFromCurrency] = useState<Currency>("USD");
+  const [toCurreny, setToCurreny] = useState<Currency>("EUR");
+  const [fromAmount, setFromAmount] = useState(0);
+  const [toAmount, setToAmount] = useState(0);
+
   useEffect(() => {
-    fetch(Base_URL)
-      .then((res) => res.json)
-      .then((data) => console.log("err"));
+    mockCurrencyAPI().then((data: any) => {
+      setCurrencies(data);
+    });
   }, []);
+
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    e.preventDefault();
+    const numValue = Number(e.target.value);
+    setFromAmount(numValue);
+    setToAmount(
+      (fromAmount * currencies[fromCurrency]!) / currencies[toCurreny]!
+    );
+  }
+
   return (
     <>
-      <p>convert</p>
-      <div className="currenyPage">
-        <input type="number"></input>
-        <select>
-          <option value="hi"></option>
-        </select>
+      <br></br>
+      <form>
+        <Input
+          className="antd-input"
+          type="number"
+          value={fromAmount.toString()}
+          onChange={handleChange}
+        ></Input>
+
+        <Select value={fromCurrency} onChange={(e) => setFromCurrency(e)}>
+          {Object.keys(currencies).map((currency) => (
+            <Select.Option key={currency} value={currency}>
+              {currency}
+            </Select.Option>
+          ))}
+        </Select>
+
         <h2>=</h2>
-        <input type="number"></input>
-        <select>
-          <option value={"hi"}></option>
-        </select>
-      </div>
+
+        <Input
+          className="antd-input"
+          type="number"
+          value={Math.floor(toAmount)}
+          onChange={(e) => setToAmount(Number(e.target.value))}
+        ></Input>
+
+        <Select
+          className="antd-select "
+          value={toCurreny}
+          onChange={(e) => setToCurreny(e)}
+        >
+          {Object.keys(currencies).map((currency) => (
+            <Select.Option key={currency} value={currency}>
+              {currency}
+            </Select.Option>
+          ))}
+        </Select>
+        <br />
+      </form>
     </>
   );
 }

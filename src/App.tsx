@@ -10,27 +10,29 @@ import SignUp from "./siginUp";
 import LogIn from "./logIn";
 import ProtectedRoutes from "./protectedRoutes";
 import CurrencyPage from "./currencyPage";
-import { store } from "./store";
 
 function App() {
-  const token = store.getState().token;
-  const isLogedIn = token !== "";
-
   return (
     <>
-      <h1 className="home">Home</h1>
+      <h1 className="home">Home page</h1>
       <BrowserRouter>
-        <Link to="/signup">signup</Link>
+        <Link to="/signup">
+          <li>signup</li>
+        </Link>
         <br />
-        <Link to="/login">logIn</Link>
+        <Link to="/login">
+          <li>logIn</li>
+        </Link>
         <br />
-        <Link to="/currenctPage">CurrencyPage</Link>
+        <Link to="/currency-converter">
+          <li>Currency Converter</li>
+        </Link>
 
         <Routes>
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<LogIn />} />
           <Route
-            path="/currenctPage"
+            path="/currency-converter"
             element={
               <ProtectedRoutes>
                 <CurrencyPage />
