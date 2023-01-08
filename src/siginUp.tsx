@@ -39,8 +39,8 @@ function SignUp() {
       <Link to="/">
         <h3>Go Home</h3>
       </Link>
-      <form onSubmit={handelSubmit}>
-        <div className="signup-container">
+      <form className="md:flex" onSubmit={handelSubmit}>
+        <div className="signup-container md:flex">
           <h1>Sign Up</h1>
           <p className="text-form">
             Please fill in this form to create an account.
